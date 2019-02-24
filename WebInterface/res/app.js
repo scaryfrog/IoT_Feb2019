@@ -162,6 +162,9 @@ function getMinMaxTemp(days) {
 
     }
   }
+  //Math.round( number * 10 ) / 10 arrondi à 1 chiffre après la virgule (100, 2 chiffres..)
+  min = Math.round(min*10)/10;
+  max = Math.round(max*10)/10;
   return [min,max];
 }
 
