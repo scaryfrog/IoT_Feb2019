@@ -3,43 +3,143 @@
 <head>
   <meta charset="utf-8">
   <title>Station Météo Connectée</title>
+  <!--Vue.js-->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!--Bootstrap loading + CSS Sheets-->
+  <link rel="stylesheet" href="res/bootstrap.min.css">
+  <link href="css/owfont-regular.css" rel="stylesheet" type="text/css">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <!-- MQQT -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
   <script src="res/mqtt.js"></script>
+ <!--Application script-->
   <script src="res/app.js"></script>
 
 </head>
 
 <body>
       <div class="container" id="app">
-
-          <div class="row"> <span id='insertHour'></span> </div>
+        <br>
           <div class="row">
-            <div class="col-md-6">
-                        <div id="weather">
-                                Temperature : {{ dataWeather.main.temp }} °C
-                                T° min :
-                                Humidity : {{ dataWeather.main.humidity }} %
-                                Temps : {{ dataWeather.weather[0].description }}
+            <!--Hour & date -->
+            <div class="col-sm">
+            <div class="card border-dark">
+              <div class=card-header>
+                <h4>Aujourd'hui</h4>
+              </div>
+              <div class="card-body">
+                  <h3> <span id='insertDate'></span> </h3>
+                  <h1> <span id='insertHour'></span> </h1>
+                </div>
+            </div>
+            </div>
+            <!--weather -->
+            <div class="col-sm">
+            <div class="card border-dark">
+              <div class=card-header>
+                <h4>Méteo Actuelle</h4>
+              </div>
+              <div class="card-body">
+                        <div id="weather" class="row">
+                           <i id="weather_icon"></i>
+                           <h4>
+                          Température {{ dataWeather.main.temp }} °C<br>
+                          Humidité : {{ dataWeather.main.humidity }} % <br>
+                          {{ dataWeather.weather[0].description }} </h4>
                         </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                  Température intérieure : <span id="indoor_temp">x.x</span>°C
-            </div>
-            <div class="row">
-              <div class='col-md-3'> </div>
             </div>
           </div>
-
-
-
-
-
-
-      </div>
+          <br>
+          <!-- -->
+          <div class="row">
+            <div class="col-sm">
+              <div class="card border-dark">
+                <div class=card-header>
+                  <h4>Station intérieure</h4>
+                </div>
+                <div class="card-body">
+                  Température intérieure : <span id="indoor_temp">x.x</span>°C
+                </div>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="card border-dark">
+                <div class=card-header>
+                  <h4>Station intérieure</h4>
+                </div>
+                <div class="card-body">
+                  Température extérieure : <span id="outdoor_temp">x.x</span>°C
+                </div>
+            </div>
+          </div>
+        </div>
+        <br>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card border-dark">
+                <div class=card-header>
+                  <h5>Demain</h5>
+                </div>
+                <div class="card-body">
+                          <div id="weather1">
+                            <i id="weather1_icon"></i>
+                            {{minMaxCalc(1)[0]}}°C - {{minMaxCalc(1)[1]}}°C <br>
+                            Humidité : {{ dataWeather.main.humidity }} % <br>
+                            <h5>{{ dataWeather.weather[0].description }} </h5>
+                          </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card border-dark">
+                <div class=card-header>
+                  <h5 id="day_J+2"></h5>
+                </div>
+                <div class="card-body">
+                          <div id="weather2">
+                            <i id="weather2_icon"></i>
+                            {{minMaxCalc(2)[0]}}°C - {{minMaxCalc(2)[1]}}°C<br>
+                            Humidité : {{ dataWeather.main.humidity }} % <br>
+                            <h5>{{ dataWeather.weather[0].description }} </h5>
+                          </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card border-dark">
+                <div class=card-header>
+                  <h5 id="day_J+3"></h5>
+                </div>
+                <div class="card-body">
+                          <div id="weather3">
+                            <i id="weather3_icon"></i>
+                            {{minMaxCalc(3)[0]}}°C - {{minMaxCalc(3)[1]}}°C<br>
+                            Humidité : {{ dataWeather.main.humidity }} % <br>
+                            {{ dataWeather.weather[0].description }} <br>
+                          </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card border-dark">
+                <div class=card-header>
+                  <h5 id="day_J+4"></h5>
+                </div>
+                <div class="card-body">
+                          <div id="weather4">
+                            <i id="weather4_icon"></i>
+                            {{minMaxCalc(4)[0]}}°C - {{minMaxCalc(4)[1]}}°C<br>
+                            Humidité : {{ dataWeather.main.humidity }} % <br>
+                            {{ dataWeather.weather[0].description }}
+                          </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
