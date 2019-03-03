@@ -21,7 +21,7 @@ L’ESP8266 dispose d’une carte wifi, fonctionne avec l’IDE arduino que nous
 ### 3/ Graphique récapitulatif
 
 
-![ ](https://imgur.com/BgDeePb" ")
+![ ](https://imgur.com/BgDeePb.jpg " ")
 
 
 ### 4/ Modèle Publish / Subscribe
