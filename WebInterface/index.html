@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <title>Station Météo Connectée</title>
   <!--Vue.js-->
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+  <script src="res/vue.js"></script>
+  <!--<script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script> -->
   <!--Bootstrap loading-->
   <link rel="stylesheet" href="res/bootstrap.min.css">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   <!-- Loading OpenWeather icons CSS-->
-  <link href="css/owfont-regular.css" rel="stylesheet" type="text/css">
+  <link href="res/owfont-regular.css" rel="stylesheet" type="text/css">
   <!-- MQQT -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+  <script src="res/mqttws31.min.js" type="text/javascript"></script>
   <script src="res/mqtt.js"></script>
  <!--Application script-->
   <script src="res/app.js"></script>
@@ -45,8 +45,9 @@
                         <div id="weather" class="row">
                            <i id="weather_icon"></i>
                            <h4>
-                          Température {{ dataWeather.main.temp }} °C<br>
+                          Température : {{ dataWeather.main.temp }} °C<br>
                           Humidité : {{ dataWeather.main.humidity }} % <br>
+                          Pression : {{ dataWeather.main.pressure }} hPa <br>
                           {{ dataWeather.weather[0].description }} </h4>
                         </div>
                 </div>
@@ -62,7 +63,8 @@
                   <h4>Station intérieure</h4>
                 </div>
                 <div class="card-body">
-                  Température intérieure : <span id="indoor_temp">x.x</span>°C
+                  Température intérieure : <span id="indoor_temp">x.x</span>°C <br>
+                  Humidité relative : <span id="indoor_hum">x.x</span>%
                 </div>
               </div>
             </div>
@@ -72,7 +74,8 @@
                   <h4>Station extérieure</h4>
                 </div>
                 <div class="card-body">
-                  Température extérieure : <span id="outdoor_temp">x.x</span>°C
+                  Température extérieure : <span id="outdoor_temp">x.x</span>°C <br>
+                  Humidité relative : <span id="outdoor_hum">x.x</span>%
                 </div>
             </div>
           </div>
@@ -120,7 +123,7 @@
                             <i id="weather3_icon"></i>
                             {{minMaxCalc(3)[0]}}°C - {{minMaxCalc(3)[1]}}°C<br>
                             Humidité : {{ dataWeather.main.humidity }} % <br>
-                            {{ dataWeather.weather[0].description }} <br>
+                            <h5>{{ dataWeather.weather[0].description }} </h5>
                           </div>
                   </div>
               </div>
@@ -135,7 +138,7 @@
                             <i id="weather4_icon"></i>
                             {{minMaxCalc(4)[0]}}°C - {{minMaxCalc(4)[1]}}°C<br>
                             Humidité : {{ dataWeather.main.humidity }} % <br>
-                            {{ dataWeather.weather[0].description }}
+                            <h5>{{ dataWeather.weather[0].description }} </h5>
                           </div>
                   </div>
               </div>

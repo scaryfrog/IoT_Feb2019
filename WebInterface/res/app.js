@@ -1,9 +1,11 @@
 var MYAPPID = '7c1521895b69ec9cfd07c9fe6652b735';
 var forecast_json;
+var currentWeather_json;
 
 window.onload=function() {
   f('insertHour');
   updateDays();
+  getCurrentWeather();
   getDataWeather();
 };
 
@@ -17,6 +19,22 @@ var f = function() {
        document.getElementById("insertHour").innerHTML=heure+":"+(minutes > 9 ? "" + minutes: "0" + minutes)+":"+(seconde > 9 ? "" + seconde: "0" + seconde);
        setTimeout(f, 1000);}
        setTimeout(f, 1000);
+
+function init_CurrentWeather()
+{
+  var weather_0 = currentWeather_json.valueOf();
+  var weather0 = new Vue({
+                      el: '#weather',
+                      data: {
+                          dataWeather : weather_0,
+                      },
+                      mounted: function () {
+                        var code = weather_0.weather[0].id;
+                        document.getElementById("weather_icon").className = "owf owf-"+code+" owf-7x owf-pull-left";
+                      },
+                  });
+}
+
 
 function  init_Vue()
 {
@@ -113,6 +131,24 @@ function updateDays()
     document.getElementById("day_J+3").innerHTML = j_3.toLocaleDateString("fr-FR", { weekday: 'long',day: 'numeric' }).charAt(0).toUpperCase() +  j_3.toLocaleDateString("fr-FR", { weekday: 'long',day: 'numeric' }).substring(1).toLowerCase();
     document.getElementById("day_J+4").innerHTML = j_4.toLocaleDateString("fr-FR", { weekday: 'long',day: 'numeric' }).charAt(0).toUpperCase() +  j_4.toLocaleDateString("fr-FR", { weekday: 'long',day: 'numeric' }).substring(1).toLowerCase();
 }
+
+function getCurrentWeather()
+{
+
+  var xmlhttp = new XMLHttpRequest();
+  var url = 'https://api.openweathermap.org/data/2.5/weather?lon=3.066667&lat=50.633333&APPID='+MYAPPID+'&units=metric&lang=fr';
+
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          currentWeather_json = JSON.parse(this.responseText);
+          init_CurrentWeather();
+      }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+
+}
+
 
 function getDataWeather()
 {
