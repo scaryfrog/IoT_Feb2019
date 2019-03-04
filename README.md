@@ -43,8 +43,8 @@ De son côté l’interface web est abonnée à tous les topics et vient récup�
 
 ### 5/ Récupération les valeurs
 
-L’ESP8266 est la carte va faire office “d’interface” entre le capteur et le serveur MQTT. Comme dit précédemment, l’ESP8266 dispose d’une carte wifi. Pour la partie codage dans l’IDE Arduino nous avons du importer 2 bibliothèques: “DHT” pour la partie capteur et “EspMQTTClient” pour la partie serveur. N
-Pour commencer, on établit la connexion entre la carte et le serveur Mosquitto. Ceci va nous permettre de publier (étape publisher) un message sur un channel de notre choix (appelé topic -t) avec les valeurs de température et humidité. Puis, de "l´autre coté" notre serveur web va "subscribe" au broker pour récupérer les données voulues (étape subscriber) et les afficher sur notre page web. Le broker MQTT sert de passerelle entre la carte et le serveur web. Pour information, notre code Arduino va envoyer des informations à Mosquitto toute les secondes 
+L’ESP8266 est la carte va faire office “d’interface” entre le capteur et le serveur MQTT. Comme énoncé précédemment, l’ESP8266 dispose d’une carte wifi. Pour la partie codage dans l’IDE Arduino nous avons du importer 2 bibliothèques: “DHT” pour la partie capteur et “EspMQTTClient” pour la partie serveur. La pin data du capteur sera connectée à la pin D5 (14) de la carte ESP8266. 
+Pour commencer, on établit la connexion entre la carte et le serveur Mosquitto. Ceci va nous permettre de publier (étape publisher) un message sur un channel de notre choix (appelé topic -t) avec les valeurs de température et humidité. Puis, de "l´autre coté" notre serveur web va "subscribe" au broker pour récupérer les données voulues (étape subscriber) et les afficher sur notre page web. Le broker MQTT sert de passerelle entre la carte et le serveur web. Pour information, notre code Arduino va envoyer des données à Mosquitto toute les secondes 
 
 ### 6/ Interface web
 
