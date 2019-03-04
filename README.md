@@ -54,10 +54,10 @@ Concernant les relevés des capteurs, un script permettant l’accès au serveur
 L’interface présente également des prévisions météos grâce à l’API OpenWeather et l’affichage est géré par Vue.js (ce script se trouve dans le dossier res/app.js)
 On peut noter que l’interface est un exemple de disposition pour deux capteurs et une prévision météo sur 4 jours. Il est facile d’adapter l’affichage pour plus de capteurs en ajoutant des éléments “cards” dans le corps du HTML et en ajoutant la gestion des valeurs affichées dans le script adapté (app.js pour la météo, mqtt.js pour les capteurs).
 
-### 7/ Conclusion
+### 7/ Conclusion - Ouverture
 
 Ce projet de station météo connectée est donc un excellent exemple de réalisation rapide et à moindre coût pour réaliser sa propre station météo. L’ensemble des techniques utilisées sont peu coûteuse et permettent une grande personnalisation.
 
 Le capteur DHT11 est capable de mesurer des températures de 0 à +50°C avec une précision de +/- 2°C et des taux d'humidité relative de 20 à 80% avec une précision de +/- 5%. Une mesure peut être réalisée toutes les secondes.  Ce capteur sera + efficace à l’intérieur ou dans un environnement pas trop froid et pas trop humide.
 Si on veut augmenter la précision et avoir un capteur de température + robuste il faudra utiliser le DHT22: la précision est au demi degré près, il peut indiquer des température jusqu’à -40 degré, permet de d’effectuer 2 mesures à la seconde et présente plus de stabilité au fil des années (+0.5% contre +1% pour le DHT11). 
-
+On pourrait également penser à récupérer l'historique des données de température et d'humidité sous forme de base de donnée (grâce à InfluxDB qui est un système de gestion de base de données) et qu'on pourrait traiter grâce à Grafana (permet la visualisation et la mise en forme de données métriques)
