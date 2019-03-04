@@ -23,19 +23,19 @@ function onConnectionLost(responseObject) {
 // called when a message arrives
 function onMessageArrived(message) {
   console.log("Nouveau message du topic "+message.destinationName+" : "+message.payloadString);
-  if(message.destinationName == "home_inside/temp")
+  if(message.destinationName == "home/inside/temperature")
   {
     document.getElementById("indoor_temp").innerHTML = message.payloadString;
   }
-  if(message.destinationName == "home_outside/temp")
+  if(message.destinationName == "home/outside/temp")
   {
     document.getElementById("outdoor_temp").innerHTML = message.payloadString;
   }
-  if(message.destinationName == "home_inside/humidite")
+  if(message.destinationName == "home/inside/humidite")
   {
     document.getElementById("indoor_hum").innerHTML = message.payloadString;
   }
-  if(message.destinationName == "home_outside/humidite")
+  if(message.destinationName == "home/outside/humidite")
   {
     document.getElementById("outdoor_hum").innerHTML = message.payloadString;
   }
