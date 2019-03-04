@@ -43,11 +43,8 @@ De son côté l’interface web est abonnée à tous les topics et vient récup�
 
 ### 5/ Récupération les valeurs
 
-L’ESP8266 est la carte va faire office “d’interface” entre le capteur et le serveur MQTT. Comme dit précédemment, l’ESP8266 dispose d’une carte wifi. Pour la partie codage dans l’IDE Arduino nous avons du importer 2 bibliothèques: “DHT” pour la partie capteur et “EspMQTTClient” pour la partie serveur.
-Pour commencer, on établit la connexion entre la carte et le serveur Mosquitto. Ceci va nous permettre de publier (etape publisher) un message sur un channel de notre choix (appelé topic -t) les valeurs de température et humidité. Puis, de "l´autre coté" notre serveur web va "subscribe" au broker pour récupérer les données voulues (étape subscriber) et les afficher sur l´API weather. Le serveur MQTT sert de passerelle entre la carte
-
-
-
+L’ESP8266 est la carte va faire office “d’interface” entre le capteur et le serveur MQTT. Comme dit précédemment, l’ESP8266 dispose d’une carte wifi. Pour la partie codage dans l’IDE Arduino nous avons du importer 2 bibliothèques: “DHT” pour la partie capteur et “EspMQTTClient” pour la partie serveur. N
+Pour commencer, on établit la connexion entre la carte et le serveur Mosquitto. Ceci va nous permettre de publier (étape publisher) un message sur un channel de notre choix (appelé topic -t) avec les valeurs de température et humidité. Puis, de "l´autre coté" notre serveur web va "subscribe" au broker pour récupérer les données voulues (étape subscriber) et les afficher sur notre page web. Le broker MQTT sert de passerelle entre la carte et le serveur web. Pour information, notre code Arduino va envoyer des informations à Mosquitto toute les secondes 
 
 ### 6/ Interface web
 
@@ -62,4 +59,4 @@ On peut noter que l’interface est un exemple de disposition pour deux capteurs
 Ce projet de station météo connectée est donc un excellent exemple de réalisation rapide et à moindre coût pour réaliser sa propre station météo. L’ensemble des techniques utilisées sont peu coûteuse et permettent une grande personnalisation.
 
 Le capteur DHT11 est capable de mesurer des températures de 0 à +50°C avec une précision de +/- 2°C et des taux d'humidité relative de 20 à 80% avec une précision de +/- 5%. Une mesure peut être réalisée toutes les secondes.  Ce capteur sera + efficace à l’intérieur ou dans un environnement pas trop froid et pas trop humide.
-Si on veut augmenter la précision et avoir un capteur de température + robuste il faudra viser le DHT22: la précision est au demi degré près, il peut indiquer des température jusqu’à -40 degré, permet de d’effectuer 2 mesures à la seconde et présente plus de stabilité au fil des années (+0.5% contre +1% pour le DHT11).
+Si on veut augmenter la précision et avoir un capteur de température + robuste il faudra utiliser le DHT22: la précision est au demi degré près, il peut indiquer des température jusqu’à -40 degré, permet de d’effectuer 2 mesures à la seconde et présente plus de stabilité au fil des années (+0.5% contre +1% pour le DHT11). 
